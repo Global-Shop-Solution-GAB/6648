@@ -1,0 +1,645 @@
+﻿Program.Sub.ScreenSU.Start
+Gui.Form..Create(BaseForm)
+Gui.Form..Caption("Print Inventory Label")
+Gui.Form..Size(12600,7275)
+Gui.Form..MinX(0)
+Gui.Form..MinY(0)
+Gui.Form..Position(0,0)
+Gui.Form..AlwaysOnTop(True)
+Gui.Form..FontName("Tahoma")
+Gui.Form..FontSize(8.25)
+Gui.Form..ControlBox(True)
+Gui.Form..MaxButton(False)
+Gui.Form..MinButton(True)
+Gui.Form..MousePointer(0)
+Gui.Form..Moveable(True)
+Gui.Form..Sizeable(False)
+Gui.Form..ShowInTaskBar(True)
+Gui.Form..TitleBar(True)
+Gui.Form..Event(UnLoad,Unload)
+Gui.Form.txtPart.Create(TextBox,"",True,2205,300,0,105,465,True,0,"Tahoma",8.25,,1)
+Gui.Form.txtPart.MaxLength(20)
+Gui.Form.txtPart.Event(LostFocus,txtPart_LostFocus)
+Gui.Form.txtPart.TabStop(True)
+Gui.Form.txtPart.TabIndex(1)
+Gui.Form.txtLoc.Create(TextBox,"",True,420,300,0,2370,465,True,0,"Tahoma",8.25,,1)
+Gui.Form.txtLoc.Event(LostFocus,txtLoc_LostFocus)
+Gui.Form.txtLoc.TabStop(True)
+Gui.Form.txtLoc.TabIndex(2)
+Gui.Form.lbl1.Create(Label,"Part / Rev",True,735,195,0,120,240,True,0,"Tahoma",8.25,,0,0)
+Gui.Form.lbl1.BorderStyle(0)
+Gui.Form.lbl2.Create(Label,"Loc",True,240,195,0,2385,240,True,0,"Tahoma",8.25,,0,0)
+Gui.Form.lbl2.BorderStyle(0)
+Gui.Form.txtBin.Create(TextBox,"",True,1080,300,0,3705,465,True,0,"Tahoma",8.25,,1)
+Gui.Form.txtBin.Event(LostFocus,txtBin_LostFocus)
+Gui.Form.txtBin.TabStop(True)
+Gui.Form.txtBin.TabIndex(4)
+Gui.Form.lbl3.Create(Label,"Bin",True,210,195,0,3735,240,True,0,"Tahoma",8.25,,0,0)
+Gui.Form.lbl3.BorderStyle(0)
+Gui.Form.cmdPartLocLookup.Create(Button)
+Gui.Form.cmdPartLocLookup.Enabled(True)
+Gui.Form.cmdPartLocLookup.Visible(True)
+Gui.Form.cmdPartLocLookup.Zorder(0)
+Gui.Form.cmdPartLocLookup.Size(345,345)
+Gui.Form.cmdPartLocLookup.Position(2850,450)
+Gui.Form.cmdPartLocLookup.Caption("")
+Gui.Form.cmdPartLocLookup.FontName("Tahoma")
+Gui.Form.cmdPartLocLookup.FontSize(8.25)
+Gui.Form.cmdPartLocLookup.SvgPicture("icon_browser_color")
+Gui.Form.cmdPartLocLookup.Event(Click,cmdPartLocLookup_Click)
+Gui.Form.cmdPartLocLookup.TabStop(True)
+Gui.Form.cmdPartLocLookup.TabIndex(3)
+Gui.Form.cmdBinLookup.Create(Button)
+Gui.Form.cmdBinLookup.Enabled(True)
+Gui.Form.cmdBinLookup.Visible(True)
+Gui.Form.cmdBinLookup.Zorder(0)
+Gui.Form.cmdBinLookup.Size(345,345)
+Gui.Form.cmdBinLookup.Position(4845,450)
+Gui.Form.cmdBinLookup.Caption("")
+Gui.Form.cmdBinLookup.FontName("Tahoma")
+Gui.Form.cmdBinLookup.FontSize(8.25)
+Gui.Form.cmdBinLookup.SvgPicture("icon_browser_color")
+Gui.Form.cmdBinLookup.Event(Click,cmdBinLookup_Click)
+Gui.Form.cmdBinLookup.TabStop(True)
+Gui.Form.cmdBinLookup.TabIndex(5)
+Gui.Form.cmdPrint.Create(Button)
+Gui.Form.cmdPrint.Enabled(True)
+Gui.Form.cmdPrint.Visible(True)
+Gui.Form.cmdPrint.Zorder(0)
+Gui.Form.cmdPrint.Size(1125,345)
+Gui.Form.cmdPrint.Position(105,6375)
+Gui.Form.cmdPrint.Caption("Print")
+Gui.Form.cmdPrint.FontName("Tahoma")
+Gui.Form.cmdPrint.FontSize(8.25)
+Gui.Form.cmdPrint.SvgPicture("icon_printer_color")
+Gui.Form.cmdPrint.Event(Click,cmdPrint_Click)
+Gui.Form.cmdPrint.TabStop(True)
+Gui.Form.cmdPrint.TabIndex(6)
+Gui.Form.GsGcData.Create(GsGridControl)
+Gui.Form.GsGcData.Enabled(True)
+Gui.Form.GsGcData.Visible(True)
+Gui.Form.GsGcData.Zorder(0)
+Gui.Form.GsGcData.Size(12345,5265)
+Gui.Form.GsGcData.Position(105,1005)
+Gui.Form.GsGcData.Event(CellValueChanged,GsGcData_CellValueChanged)
+Gui.Form.cmdAdd.Create(Button)
+Gui.Form.cmdAdd.Enabled(True)
+Gui.Form.cmdAdd.Visible(True)
+Gui.Form.cmdAdd.Zorder(0)
+Gui.Form.cmdAdd.Size(1125,345)
+Gui.Form.cmdAdd.Position(6900,420)
+Gui.Form.cmdAdd.Caption("Add")
+Gui.Form.cmdAdd.FontName("Tahoma")
+Gui.Form.cmdAdd.FontSize(8.25)
+Gui.Form.cmdAdd.SvgPicture("icon_add_color")
+Gui.Form.cmdAdd.Event(Click,cmdAdd_Click)
+Gui.Form.txtNumberOfLabels.Create(TextBox,"1",True,600,300,0,5730,465,True,0,"Tahoma",8.25,,1)
+Gui.Form.txtNumberOfLabels.DefaultValue("1")
+Gui.Form.txtNumberOfLabels.NumericOnly(2)
+Gui.Form.lbl4.Create(Label,"No of Labels",True,885,195,0,5730,240,True,0,"Tahoma",8.25,,0,0)
+Gui.Form.lbl4.BorderStyle(0)
+Gui.Form.cmdReset.Create(Button)
+Gui.Form.cmdReset.Enabled(True)
+Gui.Form.cmdReset.Visible(True)
+Gui.Form.cmdReset.Zorder(0)
+Gui.Form.cmdReset.Size(1125,345)
+Gui.Form.cmdReset.Position(1290,6375)
+Gui.Form.cmdReset.Caption("Reset")
+Gui.Form.cmdReset.FontName("Tahoma")
+Gui.Form.cmdReset.FontSize(8.25)
+Gui.Form.cmdReset.SvgPicture("icon_reset_color")
+Gui.Form.cmdReset.Event(Click,cmdReset_Click)
+Gui.Form.chkLongPart.Create(CheckBox)
+Gui.Form.chkLongPart.Enabled(True)
+Gui.Form.chkLongPart.Visible(False)
+Gui.Form.chkLongPart.Zorder(0)
+Gui.Form.chkLongPart.Size(2340,300)
+Gui.Form.chkLongPart.Position(2550,6390)
+Gui.Form.chkLongPart.Caption("Use Long Part (if available)")
+Gui.Form.chkLongPart.FontName("Tahoma")
+Gui.Form.chkLongPart.FontSize(8.25)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+V.Global.sGridViews.Declare(String)
+V.Global.fGrandTotal.Declare(Float)
+V.Global.bLongPart.Declare
+Program.External.Include.Library("GAB_6648_Gridview_UniversalFunctions.lib")
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.Try
+'Josh Withrow
+'2022-02-18 for Key Gas
+'Customer requested label that consolidates PART, LOC, BIN with summed QTY across all ITEM_MASTER
+'records to represent total qty of part in the bin regardless of LOT/HEAT/SERIAL.
+'BixRB
+'13 Dec 2022 for Maccor
+'Added Long Part Support and some general speed fixes (i.e. accessing INVENTORY_MSTR instead of V_INVENTORY_ALL)
+'Look for V.Global.bLongPart to see all the long part mods
+
+'Hooks...
+'	GUI
+'		Populate 15710
+'		Script 1/2/3 - 15760
+'		Passed Vars - Script 1/2/3 - 000016 / 000020 / 000021
+'	PO Receipts
+'		Populate 15020
+'		Script 1/2/3 - 15047 / 15048 / 15049
+'		Passed Vars - Script 1/2/3 - 000316 / 000317 / 000318
+'	WIP to FG
+'		Populate 16492
+'		Script 1/2/3 - 16512 / 16514 / 16516
+'		Passed Vars - Script 1/2/3 - 000260 / 000261 / 000262
+
+F.Intrinsic.Control.SelectCase(V.Caller.Hook)
+	
+	'Legacy GUI...  set label of Script 1 to "Inv Label"
+	F.Intrinsic.Control.Case(15710)
+		V.Passed.000016.Set("Inv Label")
+		F.Intrinsic.Control.End
+		
+	'PO Receipts...  set label of Script 1 to "Inv Label"
+	F.Intrinsic.Control.Case(15020)
+		V.Passed.000316.Set("Inv Label")
+		F.Intrinsic.Control.End
+		
+	'WIP To Finished Goods...  set label of Script 1 to "Inv Label"
+	F.Intrinsic.Control.Case(16492)
+		V.Passed.000260.Set("Inv Label")
+		F.Intrinsic.Control.End
+		
+F.Intrinsic.Control.EndSelect
+
+F.Intrinsic.Control.CallSub(GetLongPartOpt)
+
+'If we got here, present the Form and set focus to the Part field, first presented.
+F.ODBC.Connection!con.OpenCompanyConnection(500)
+
+'Prepare Grid & Dataview
+V.Global.sGridViews.Set("Form*!*GsGcData*!*gvData")
+F.Intrinsic.Control.If(V.Global.bLongPart)
+	F.Data.DataTable.CreateFromSQL("dtData","con","select '' PART, '' LONG_PART, '' LONG_REV, '' LOCN, '' DESCRIPTION, '' BIN, '' LOT, 0.0000 QTY_ON_LABEL, 0 LABEL_COPY, '' INV_UM, '' USER_ID",True)
+F.Intrinsic.Control.Else
+	F.Data.DataTable.CreateFromSQL("dtData","con","select '' PART, '' LOCN, '' DESCRIPTION, '' BIN, '' LOT, 0.0000 QTY_ON_LABEL, 0 LABEL_COPY, '' INV_UM, '' USER_ID",True)
+F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.CallSub(LoadGV,"DT","dtData","GV","gvData","GSGC","GsGcData","FRM","Form")
+F.Intrinsic.Control.CallSub(SetGVProperties)
+F.Data.DataTable.DeleteRow("dtData")
+
+Gui.Form..Show()
+'BixRB - GAB will have a visual glitch if i don't have this in both places for whatever reason
+Gui.Form.chkLongPart.Visible(V.Global.bLongPart)
+Gui.Form.txtPart.SetFocus
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Catching,"Sub",V.Ambient.CurrentSubroutine,"ErrorNo",V.Ambient.ErrorNumber,"ErrorDesc",V.Ambient.ErrorDescription) 
+F.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+Program.Sub.SetGVProperties.Start
+F.Intrinsic.Control.Try
+
+Gui.Form.GsGcData.SetGridViewProperty("gvData","OptionsFindAlwaysVisible",False)
+Gui.Form.GsGcData.SetGridViewProperty("gvData","OptionsViewShowGroupPanel",False)
+Gui.Form.GsGcData.SetGridViewProperty("gvData","OptionBehaviorEditable",True)
+Gui.Form.GsGcData.SetGridViewProperty("gvData","ReadOnly",False)
+Gui.Form.GsGcData.SetGridViewProperty("gvData","AllowAddRows",False)
+Gui.Form.GsGcData.SetGridViewProperty("gvData","AllowDeleteRows",True)
+Gui.Form.GsGcData.SetGridViewProperty("gvData","AllowFilter",False)
+
+Gui.Form.GsGcData.SetColumnProperty("gvData","QTY_ON_LABEL","CellHAlignment","Far")
+Gui.Form.GsGcData.SetColumnProperty("gvData","QTY_ON_LABEL","DisplayCustomNumeric","##,###,##0.0000")
+Gui.Form.GsGcData.SetColumnProperty("gvData","QTY_ON_LABEL","CellBackColor",V.Color.SEC-GSS-04)
+Gui.Form.GsGcData.SetColumnProperty("gvData","QTY_ON_LABEL","EditMaskType","numeric")
+Gui.Form.GsGcData.SetColumnProperty("gvData","QTY_ON_LABEL","EditMask","##,###,##0.0000")
+Gui.Form.GsGcData.SetColumnProperty("gvData","QTY_ON_LABEL","EditMaskAsDisplayFormat",True)
+
+Gui.Form.GsGcData.SetColumnProperty("gvData","LABEL_COPY","CellHAlignment","Far")
+Gui.Form.GsGcData.SetColumnProperty("gvData","LABEL_COPY","DisplayCustomNumeric","##,###,##0")
+Gui.Form.GsGcData.SetColumnProperty("gvData","LABEL_COPY","CellBackColor",V.Color.PRI-GSS-01)
+Gui.Form.GsGcData.SetColumnProperty("gvData","LABEL_COPY","EditMaskType","numeric")
+Gui.Form.GsGcData.SetColumnProperty("gvData","LABEL_COPY","EditMask","##,###,##0")
+Gui.Form.GsGcData.SetColumnProperty("gvData","LABEL_COPY","EditMaskAsDisplayFormat",True)
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Catching,"Sub",V.Ambient.CurrentSubroutine,"ErrorNo",V.Ambient.ErrorNumber,"ErrorDesc",V.Ambient.ErrorDescription) 
+F.Intrinsic.Control.EndTry
+Program.Sub.SetGVProperties.End
+
+Program.Sub.Unload.Start
+F.Intrinsic.Control.Try
+
+F.Intrinsic.Control.If(V.Global.bLongPart)
+	F.Global.Registry.AddValue(V.Caller.User,V.Caller.CompanyCode,"GCG_6648",400861,0,False,"",V.Screen.Form!chkLongPart.CheckedAsBoolean,0,0,V.Ambient.Date,V.Ambient.Time,"")
+F.Intrinsic.Control.EndIf
+Gui.Form..Visible(false)
+F.Data.Datatable.Close("dtData")
+F.ODBC.Connection!con.Close
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Catching,"Sub",V.Ambient.CurrentSubroutine,"ErrorNo",V.Ambient.ErrorNumber,"ErrorDesc",V.Ambient.ErrorDescription) 
+F.Intrinsic.Control.EndTry
+Program.Sub.Unload.End
+
+Program.Sub.txtPart_LostFocus.Start
+'Validate Part Number
+F.Intrinsic.Control.Try
+
+V.Local..BulkDeclareString(sSQL,sRet)
+
+F.Intrinsic.Control.If(V.Screen.Form!txtPart.Text.Trim,=,"")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.String.Build("select count(*) from inventory_mstr where part='{0}'",V.Screen.Form!txtPart.Text,V.Local.sSQL)
+F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,=,"0")
+	F.Intrinsic.UI.Msgbox("Part not found.","Notice")
+	Gui.Form.txtPart.Text("")
+	Gui.Form.txtPart.SetFocus
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Catching,"Sub",V.Ambient.CurrentSubroutine,"ErrorNo",V.Ambient.ErrorNumber,"ErrorDesc",V.Ambient.ErrorDescription) 
+F.Intrinsic.Control.EndTry
+Program.Sub.txtPart_LostFocus.End
+
+Program.Sub.txtLoc_LostFocus.Start
+'Validate Part/Loc
+F.Intrinsic.Control.Try
+
+V.Local..BulkDeclareString(sSQL,sRet)
+
+F.Intrinsic.Control.If(V.Screen.Form!txtLoc.Text.Trim,=,"")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.String.Build("select count(*) from inventory_mstr where part='{0}' and location='{1}'",V.Screen.Form!txtPart.Text,V.Screen.Form!txtLoc.Text,V.Local.sSQL)
+F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,=,"0")
+	F.Intrinsic.UI.Msgbox("Part/Loc not found.","Notice")
+	Gui.Form.txtLoc.Text("")
+	Gui.Form.txtLoc.SetFocus
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Catching,"Sub",V.Ambient.CurrentSubroutine,"ErrorNo",V.Ambient.ErrorNumber,"ErrorDesc",V.Ambient.ErrorDescription) 
+F.Intrinsic.Control.EndTry
+Program.Sub.txtLoc_LostFocus.End
+
+Program.Sub.txtBin_LostFocus.Start
+'Validate Bin or Part/Loc/Bin Combo
+F.Intrinsic.Control.Try
+
+V.Local..BulkDeclareString(sSQL,sRet)
+
+F.Intrinsic.Control.If(V.Screen.Form!txtBin.Text.Trim,=,"")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.String.Build("select count(*) from v_bin_master where bin='{0}' and location='{1}'",V.Screen.Form!txtBin.Text,V.Screen.Form!txtLoc.Text,V.Local.sSQL)
+F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,=,"0")
+	F.Intrinsic.UI.Msgbox("Bin/Loc not found.","Notice")
+	Gui.Form.txtBin.Text("")
+	Gui.Form.txtBin.SetFocus
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.String.Build("select count(*) from item_master where part='{0}' and location='{1}' and bin='{2}'",V.Screen.Form!txtPart.Text,V.Screen.Form!txtLoc.Text,V.Screen.Form!txtBin.Text,V.Local.sSQL)
+F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,=,"0")
+	F.Intrinsic.UI.Msgbox("Part/Loc/Bin combination not found.","Notice")
+	Gui.Form.txtBin.SetFocus
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Catching,"Sub",V.Ambient.CurrentSubroutine,"ErrorNo",V.Ambient.ErrorNumber,"ErrorDesc",V.Ambient.ErrorDescription) 
+F.Intrinsic.Control.EndTry
+Program.Sub.txtBin_LostFocus.End
+
+Program.Sub.cmdPartLocLookup_Click.Start
+'Part Browser
+F.Intrinsic.Control.Try
+
+V.Local..BulkDeclareString(sSql,sTitles,sWidths,sRet)
+
+F.Intrinsic.Control.If(V.Global.bLongPart)
+	V.Local.sSql.Set("select A.PART, rtrim(B.DISPLAY_PART) as LONG_PART, rtrim(B.DISPLAY_REV) as LONG_REV, A.LOCATION AS LOCN, rtrim(C.DESCRIPTION) as DESCRIPTION, A.BIN, A.LOT, SUM(A.QUANTITY) AS QTY_ON_LABEL from ITEM_MASTER A left outer join INV_LXR B on A.PART=B.GSS_PART left outer join INVENTORY_MSTR C on A.PART = C.PART and A.LOCATION = C.LOCATION GROUP BY A.PART, B.DISPLAY_PART, B.DISPLAY_REV, A.LOCATION, C.DESCRIPTION, A.BIN, A.LOT order by A.PART, A.LOCATION, A.BIN, A.LOT")
+	V.Local.sTitles.Set("Part*!*Long Part*!*Long Rev*!*Location*!*Description*!*Bin*!*Lot*!*Quantity")
+	V.Local.sWidths.Set("1000*!*1500*!*750*!*300*!*1800*!*500*!*750*!*750")
+F.Intrinsic.Control.Else
+	V.Local.sSql.Set("select A.PART, A.LOCATION AS LOCN, rtrim(B.DESCRIPTION) as DESCRIPTION, A.BIN, A.LOT, SUM(A.QUANTITY) AS QTY_ON_LABEL from ITEM_MASTER A left outer join INVENTORY_MSTR B on A.PART = B.PART and A.LOCATION = B.LOCATION GROUP BY A.PART, A.LOCATION, B.DESCRIPTION, A.BIN, A.LOT order by A.PART, A.LOCATION, A.BIN, A.LOT")
+	V.Local.sTitles.Set("Part*!*Location*!*Description*!*Bin*!*Lot*!*Quantity")
+	V.Local.sWidths.Set("1000*!*300*!*1800*!*500*!*750*!*750")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.String.Split(V.Local.sTitles,"*!*",V.Local.sTitles)
+F.Intrinsic.String.Split(V.Local.sWidths,"*!*",V.Local.sWidths)
+F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+F.Intrinsic.UI.Browser("Select Inventory Record","con",V.Local.sSql,V.Local.sTitles,V.Local.sWidths,9000,8000,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.Form.txtPart.Text(V.Local.sRet(0))
+	F.Intrinsic.Control.If(V.Global.bLongPart)
+		Gui.Form.txtLoc.Text(V.Local.sRet(3))
+		Gui.Form.txtBin.Text(V.Local.sRet(5))
+	F.Intrinsic.Control.Else
+		Gui.Form.txtLoc.Text(V.Local.sRet(1))
+		Gui.Form.txtBin.Text(V.Local.sRet(3))
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Catching,"Sub",V.Ambient.CurrentSubroutine,"ErrorNo",V.Ambient.ErrorNumber,"ErrorDesc",V.Ambient.ErrorDescription) 
+F.Intrinsic.Control.EndTry
+Program.Sub.cmdPartLocLookup_Click.End
+
+Program.Sub.cmdBinLookup_Click.Start
+'Bin Browser
+F.Intrinsic.Control.Try
+
+V.Local..BulkDeclareString(sSql,sTitles,sWidths,sRet)
+
+V.Local.sSql.Set("select distinct A.BIN, A.LOCATION LOCN, B.BIN_DESCRIPTION from V_ITEM_MASTER A left outer join V_BIN_MASTER B on A.BIN=B.BIN and A.LOCATION=B.LOCATION order by LOCN, A.BIN")
+V.Local.sTitles.Set("Bin*!*Locn*!*Bin Description")
+V.Local.sWidths.Set("700*!*300*!*1800")
+
+F.Intrinsic.String.Split(V.Local.sTitles,"*!*",V.Local.sTitles)
+F.Intrinsic.String.Split(V.Local.sWidths,"*!*",V.Local.sWidths)
+F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+F.Intrinsic.UI.Browser("Select Bin","con",V.Local.sSql,V.Local.sTitles,V.Local.sWidths,5000,8000,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.Form.txtBin.Text(V.Local.sRet(0))
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Catching,"Sub",V.Ambient.CurrentSubroutine,"ErrorNo",V.Ambient.ErrorNumber,"ErrorDesc",V.Ambient.ErrorDescription) 
+F.Intrinsic.Control.EndTry
+Program.Sub.cmdBinLookup_Click.End
+
+Program.Sub.cmdPrint_Click.Start
+F.Intrinsic.Control.Try
+
+V.Local..BulkDeclareString(sReportPath,sAltReportPath,sMsg)
+V.Local..BulkDeclareLong(iBIRunID,iBILogID,iBIRptID,iCnt)
+V.Local..BulkDeclareBoolean(bExists)
+
+'Report Details...
+F.Intrinsic.String.Concat(V.Caller.BusintDir,"\Labels\Custom\GAB_6648_InventoryPartLabel_Codesoft.lab",V.Local.sReportPath)
+F.Intrinsic.File.Exists(V.Local.sReportPath,V.Local.bExists)
+F.Intrinsic.Control.If(V.Local.bExists)
+	F.Global.BI.InitializeReport("Inventory Part Label Codesoft (6648)",V.Local.sReportPath,V.Local.iBIRptID)
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Concat(V.Caller.BusintDir,"\Labels\Custom\GAB_6640_InventoryPartLabel_Codesoft.lab",V.Local.sAltReportPath)
+	F.Intrinsic.File.Exists(V.Local.sAltReportPath,V.Local.bExists)
+	F.Intrinsic.Control.If(V.Local.bExists)
+		F.Global.BI.InitializeReport("Inventory Part Label Codesoft (6648)",V.Local.sAltReportPath,V.Local.iBIRptID)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Build("Please ensure that the label template exists.{0}{0}{1}{0}...or...{0}{2}",V.Ambient.NewLine,V.Local.sReportPath,V.Local.sAltReportPath,V.Local.sMsg)
+		F.Intrinsic.UI.Msgbox(V.Local.sMsg,"Report Template Not Found")
+		F.Intrinsic.Control.ExitSub
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+'Getting Run ID...
+F.Global.BI.GetRunID(V.Local.iBIRunID)
+'Getting Log ID, start logging...
+F.Global.BI.StartLogging(V.Local.iBIRunID,V.Local.iBIRptID,-1,"",V.Local.iBILogID)
+
+Gui.Form.GsGcData.SuspendLayout
+
+F.Intrinsic.Control.If(V.Screen.Form!chkLongPart.CheckedAsBoolean)
+	'F.Data.DataTable.CopyColumn("dtData","LONG_PART","PART")
+	'Need to loop through and verify that a blank part number is not used
+	F.Intrinsic.Control.For(V.Local.iCnt,0,V.DataTable.dtData.RowCount--,1)
+		F.Intrinsic.Control.If(V.DataTable.dtData(V.Local.iCnt).LONG_PART!FieldValTrim,<>,"")
+			F.Data.DataTable.SetValue("dtData",V.Local.iCnt,"PART",V.DataTable.dtData(V.Local.iCnt).LONG_PART!FieldValTrim)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.DataTable.dtData.RowCount--,<>,-1)
+    'Printing Codesoft label
+    F.Global.BI.PrintCodesoftLabelFromDataTable(V.Local.iBIRunID,V.Local.iBILogID,"dtData","",True)
+    'Stopping Logging
+	F.Global.BI.StopLogging(V.Local.iBILogID)
+F.Intrinsic.Control.EndIf
+
+Function.Intrinsic.Control.CallSub(cmdReset_Click)
+
+Gui.Form.GsGcData.ResumeLayout
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Catching,"Sub",V.Ambient.CurrentSubroutine,"ErrorNo",V.Ambient.ErrorNumber,"ErrorDesc",V.Ambient.ErrorDescription) 
+F.Intrinsic.Control.EndTry
+Program.Sub.cmdPrint_Click.End
+
+Program.Sub.Reset.Start
+F.Intrinsic.Control.Try
+
+Gui.Form.txtPart.Text("")
+Gui.Form.txtLoc.Text("")
+Gui.Form.txtBin.Text("")
+Gui.Form.txtNumberOfLabels.Text("1")
+Gui.Form.txtPart.SetFocus
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Catching,"Sub",V.Ambient.CurrentSubroutine,"ErrorNo",V.Ambient.ErrorNumber,"ErrorDesc",V.Ambient.ErrorDescription) 
+F.Intrinsic.Control.EndTry
+Program.Sub.Reset.End
+
+Program.Sub.cmdAdd_Click.Start
+F.Intrinsic.Control.Try
+
+V.Local..BulkDeclareString(sSQL,sRet,sFieldNames,sColumns)
+V.Local..BulkDeclareLong(i,iNumberOfLabels)
+V.Local..BulkDeclareFloat(fQtyOnLabel)
+
+F.Intrinsic.String.Build("select count(*) from v_item_master where part='{0}' and location='{1}' and bin='{2}'",V.Screen.Form!txtPart.Text,V.Screen.Form!txtLoc.Text,V.Screen.Form!txtBin.Text,V.Local.sSQL)
+F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,=,"0")
+	F.Intrinsic.UI.Msgbox("Part/Loc/Bin combination not found.","Notice")
+	Gui.Form.txtPart.SetFocus
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+F.Data.DataTable.DeleteRow("dtData")
+
+
+'Fetch Grid Data...
+V.Local.sRet.Redim(0)
+F.Intrinsic.Control.If(V.Global.bLongPart)
+	F.Intrinsic.String.Build("select A.PART, rtrim(B.DISPLAY_PART) as LONG_PART, rtrim(B.DISPLAY_REV) as LONG_REV, A.LOCATION AS LOCN, rtrim(C.DESCRIPTION) as DESCRIPTION, A.BIN, A.LOT, SUM(A.QUANTITY) AS QTY_ON_LABEL, '{3}' as USER_ID, C.UM_INVENTORY as INV_UM from ITEM_MASTER A left outer join INV_LXR B on A.PART=B.GSS_PART left outer join INVENTORY_MSTR C on A.PART = C.PART and A.LOCATION = C.LOCATION where A.PART='{0}' and A.LOCATION='{1}' and A.BIN='{2}' GROUP BY A.PART, B.DISPLAY_PART, B.DISPLAY_REV, A.LOCATION, C.DESCRIPTION, A.BIN, A.LOT, C.UM_INVENTORY order by A.PART, A.LOCATION, A.BIN, A.LOT",V.Screen.Form!txtPart.Text,V.Screen.Form!txtLoc.Text,V.Screen.Form!txtBin.Text,V.Caller.User,V.Local.sSql)
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Build("select TOP 1 A.PART, A.LOCATION AS LOCN, B.DESCRIPTION, A.BIN, A.LOT, SUM(A.QUANTITY) AS QTY_ON_LABEL, '{3}' AS USER_ID, B.UM_INVENTORY AS INV_UM from ITEM_MASTER A left outer join INVENTORY_MSTR B on A.PART=B.PART and A.LOCATION=B.LOCATION where A.PART='{0}' and A.LOCATION='{1}' and A.BIN='{2}' GROUP BY A.PART, A.LOCATION, B.DESCRIPTION, A.BIN, A.LOT, B.UM_INVENTORY order by A.PART, A.LOCATION, A.BIN, A.LOT",V.Screen.Form!txtPart.Text,V.Screen.Form!txtLoc.Text,V.Screen.Form!txtBin.Text,V.Caller.User,V.Local.sSql)
+F.Intrinsic.Control.EndIf
+F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.sRet)
+F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+
+'Add Labels to grid, performing even split of total inventory quantity...
+F.Intrinsic.Control.BlockEvents
+Gui.Form.GsGcData.InvokeWait("Loading...","Please Wait",False)
+
+F.Intrinsic.Control.If(V.Global.bLongPart)
+	V.Global.fGrandTotal.Set(V.Local.sRet(7))
+F.Intrinsic.Control.Else
+	V.Global.fGrandTotal.Set(V.Local.sRet(5))
+F.Intrinsic.Control.EndIf
+F.Intrinsic.String.Format(V.Global.fGrandTotal,"##,###,##0.0000",V.Global.fGrandTotal)
+
+F.Intrinsic.Math.Int(V.Screen.Form!txtNumberOfLabels.Text,V.Local.iNumberOfLabels)
+F.Intrinsic.Control.If(V.Global.bLongPart)
+	F.Intrinsic.Math.Div(V.Local.sRet(7).Float,V.Local.iNumberOfLabels,V.Local.fQtyOnLabel)
+F.Intrinsic.Control.Else
+	F.Intrinsic.Math.Div(V.Local.sRet(5).Float,V.Local.iNumberOfLabels,V.Local.fQtyOnLabel)
+F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.For(i,1,V.Local.iNumberOfLabels,1)
+	F.Intrinsic.Control.If(V.Global.bLongPart)
+		F.Data.DataTable.AddRowByMap("dtData","PART*!*LONG_PART*!*LONG_REV*!*LOCN*!*DESCRIPTION*!*BIN*!*LOT*!*QTY_ON_LABEL*!*LABEL_COPY*!*USER_ID*!*INV_UM",V.Local.sRet(0),V.Local.sRet(1),V.Local.sRet(2),V.Local.sRet(3),V.Local.sRet(4),V.Local.sRet(5),V.Local.sRet(6),V.Local.fQtyOnLabel,1,V.Local.sRet(8),V.Local.sRet(9))
+	F.Intrinsic.Control.Else
+		F.Data.DataTable.AddRowByMap("dtData","PART*!*LOCN*!*DESCRIPTION*!*BIN*!*LOT*!*QTY_ON_LABEL*!*LABEL_COPY*!*USER_ID*!*INV_UM",V.Local.sRet(0),V.Local.sRet(1),V.Local.sRet(2),V.Local.sRet(3),V.Local.sRet(4),V.Local.fQtyOnLabel,1,V.Local.sRet(6),V.Local.sRet(7))
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(i)
+
+F.Data.DataTable.AcceptChanges("dtData")
+F.Intrinsic.Control.CallSub(LoadGV,"DT","dtData","GV","gvData","GSGC","GsGcData","FRM","Form")
+
+'Data Added, format/etc.
+F.Intrinsic.Control.CallSub(Reset)
+
+Gui.Form.GsGcData.SuspendLayout()
+
+F.Intrinsic.Control.CallSub(SetGVProperties)
+
+F.Intrinsic.String.Concat("",V.DataTable.dtData.FieldNames,V.Local.sFieldNames)
+F.Intrinsic.String.Split(V.Local.sFieldNames,"*!*",V.Local.sColumns)
+V.Local.i.Set(0)
+F.Intrinsic.Control.For(V.Local.i,0,V.Local.sColumns.UBound,1)			
+	Gui.Form.GsGcData.SetColumnProperty("gvData",V.Local.sColumns(V.Local.i),"AllowEdit",False)
+	Gui.Form.GsGcData.SetColumnProperty("gvData",V.Local.sColumns(V.Local.i),"ReadOnly",True)
+F.Intrinsic.Control.Next(V.Local.i)
+			
+Gui.Form.GsGcData.SetColumnProperty("gvData","QTY_ON_LABEL","AllowEdit",True)
+Gui.Form.GsGcData.SetColumnProperty("gvData","QTY_ON_LABEL","ReadOnly",False)
+Gui.Form.GsGcData.SetColumnProperty("gvData","LABEL_COPY","AllowEdit",True)
+Gui.Form.GsGcData.SetColumnProperty("gvData","LABEL_COPY","ReadOnly",False)
+
+Gui.Form.GsGcData.ResumeLayout()
+
+Gui.Form.GsGcData.HideWait
+F.Intrinsic.Control.UnBlockEvents
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Catching,"Sub",V.Ambient.CurrentSubroutine,"ErrorNo",V.Ambient.ErrorNumber,"ErrorDesc",V.Ambient.ErrorDescription) 
+F.Intrinsic.Control.EndTry
+Program.Sub.cmdAdd_Click.End
+
+Program.Sub.GsGcData_CellValueChanged.Start
+F.Intrinsic.Control.Try
+
+V.Local..BulkDeclareString(sMsg)
+V.Local..BulkDeclareLong(i,iNextLabel)
+V.Local..BulkDeclareFloat(fTotal,fValue,fRemainingTotal,fRemainingLabels,fStartingRow,fQtyOnLabel,fDifference)
+
+'Because...
+F.Data.DataTable.AcceptChanges("dtData")
+
+'Only need to do magic if Qty On Label was updated...  Label Copy, just end.
+F.Intrinsic.Control.If(V.Args.COLUMN.UCase,=,"LABEL_COPY")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+'Find Running Total to this point...
+F.Intrinsic.Control.For(i,0,V.Args.RowIndex,1)
+	F.Intrinsic.Math.Add(V.Local.fValue,V.DataTable.dtData(V.Local.i).QTY_ON_LABEL!FieldValFloat,V.Local.fValue)
+F.Intrinsic.Control.Next(i)
+
+'Calculate remaining total...
+F.Intrinsic.Math.Sub(V.Global.fGrandTotal,V.Local.fValue,V.Local.fRemainingTotal)
+
+'Calculate number of rows (labels) after the edited row...
+F.Intrinsic.Math.Sub(V.DataTable.dtData.RowCount--,V.Args.RowIndex,V.Local.fRemainingLabels)
+
+'Calculate remaining QtyOnLabel for remaining labels...
+F.Intrinsic.Control.If(V.Local.fRemainingLabels,>,0)
+	F.Intrinsic.Math.Div(V.Local.fRemainingTotal,V.Local.fRemainingLabels,V.Local.fQtyOnLabel)
+F.Intrinsic.Control.Else
+	V.Local.fQtyOnLabel.Set(V.Local.fRemainingTotal)
+F.Intrinsic.Control.EndIf
+
+'Magic.
+F.Intrinsic.Math.Add(V.Args.RowIndex,1,V.Local.iNextLabel)
+F.Intrinsic.Control.For(i,V.Local.iNextLabel,V.DataTable.dtData.RowCount--,1)
+	F.Data.DataTable.SetValue("dtData",V.Local.i,"QTY_ON_LABEL",V.Local.fQtyOnLabel)
+F.Intrinsic.Control.Next(i)
+
+'Validation cha cha cha...
+F.Data.DataTable.Compute("dtData","SUM(QTY_ON_LABEL)","",V.Local.fTotal)
+F.Intrinsic.String.Format(V.Local.fTotal,"##,###,##0.0000",V.Local.fTotal)
+
+F.Intrinsic.Control.If(V.Local.fTotal,<>,V.Global.fGrandTotal)
+	F.Intrinsic.Math.Sub(V.Global.fGrandTotal,V.Local.fTotal,V.Local.fDifference)
+	F.Intrinsic.String.Format(V.Local.fDifference,"##,###,##0.0000",V.Local.fDifference)
+	F.Intrinsic.String.Build("Label quantities entered do not equal inventory quantity.{2}{2}Inventory Quantity: {1}{2}Total Label Quantities: {0}{2}Difference: {3}",V.Local.fTotal,V.Global.fGrandTotal,V.Ambient.NewLine,V.Local.fDifference,V.Local.sMsg)
+	F.Intrinsic.UI.Msgbox(V.Local.sMsg,"Quantity Mismatch")
+	Gui.Form.cmdPrint.Enabled(False)
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+Gui.Form.cmdPrint.Enabled(True)
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Catching,"Sub",V.Ambient.CurrentSubroutine,"ErrorNo",V.Ambient.ErrorNumber,"ErrorDesc",V.Ambient.ErrorDescription) 
+F.Intrinsic.Control.EndTry
+Program.Sub.GsGcData_CellValueChanged.End
+
+Program.Sub.cmdReset_Click.Start
+F.Intrinsic.Control.Try
+
+F.Data.DataTable.DeleteRow("dtData")
+F.Data.DataTable.AcceptChanges("dtData")
+F.Intrinsic.Control.CallSub(Reset)
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Catching,"Sub",V.Ambient.CurrentSubroutine,"ErrorNo",V.Ambient.ErrorNumber,"ErrorDesc",V.Ambient.ErrorDescription) 
+F.Intrinsic.Control.EndTry
+Program.Sub.cmdReset_Click.End
+
+Program.Sub.GetLongPartOpt.Start
+V.Local.bChk.Declare
+F.Intrinsic.Control.Try
+
+'Read Long Part (Large Inventory) option
+F.Global.General.ReadOption(400861,0,False,0,V.Global.bLongPart)
+Gui.Form.chkLongPart.Visible(V.Global.bLongPart)
+F.Intrinsic.Control.If(V.Global.bLongPart)
+	F.Global.Registry.ReadValue(V.Caller.User,V.Caller.CompanyCode,"GCG_6648",400861,0,0,False,V.Local.bChk)
+	Gui.Form.chkLongPart.Value(V.Local.bChk)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.CallSub(Catching,"Sub",V.Ambient.CurrentSubroutine,"ErrorNo",V.Ambient.ErrorNumber,"ErrorDesc",V.Ambient.ErrorDescription) 
+F.Intrinsic.Control.EndTry
+Program.Sub.GetLongPartOpt.End
+
+Program.Sub.Comments.Start
+${$5$}$2.0.0.0$}$2
+${$6$}$bbaker$}$20221213113738375$}$pM7xsHplA2E9VCTenDTJ47gi1rF/t66WvDIiaky4+7yLp2t37XYSCZH4Ar/M3cw+X1x5tt7Gvgw=
+Program.Sub.Comments.End
